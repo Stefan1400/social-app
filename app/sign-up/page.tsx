@@ -4,6 +4,13 @@ import { useState } from "react";
 import Link from "next/link";
 import { Eye, EyeOff } from "lucide-react";
 
+export type User = {
+  id: string;
+  email: string;
+  username: string;
+  password: string;
+}
+
 export default function SignUpPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -23,7 +30,7 @@ export default function SignUpPage() {
   const [loading, setLoading] = useState(false);
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     const newErrors = {
@@ -67,6 +74,26 @@ export default function SignUpPage() {
     if (hasErrors) return;
 
     setLoading(true);
+
+    const res = await fetch('/api/auth/sign-up', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ username, email, password })
+    });
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      console.log(data);
+      return;
+    };
+
+    setEmail('');
+    setUsername('');
+    setPassword('');
+    setConfirmPassword('');
 
     setTimeout(() => {
       setLoading(false);
@@ -114,7 +141,7 @@ export default function SignUpPage() {
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               className="mt-1 w-full rounded-lg border border-neutral-800 bg-neutral-950 px-3 py-2 text-sm text-white"
-              placeholder="yourname"
+              placeholder="username"
             />
             {errors.username && (
               <p className="mt-1 text-xs text-red-400">{errors.username}</p>
