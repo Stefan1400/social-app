@@ -2,15 +2,24 @@
 
 import Link from "next/link";
 import { Menu, PlusSquare } from "lucide-react";
+import { useState } from "react";
+import MenuDropdown from "./MenuDropdown";
 
 export default function Navbar() {
-  return (
+   
+   const [menuDropdownOpen, setMenuDropdownOpen] = useState(false);
+  
+   return (
     <nav className="w-full h-14 px-4 flex items-center justify-between bg-[#171717] border-b border-neutral-800 fixed left-0 top-0 z-1000">
 
       {/* Left: Menu Icon */}
-      <button className="p-2 hover:bg-neutral-800 rounded-md transition">
+      <button onClick={() => setMenuDropdownOpen(true)} className="p-2 hover:bg-neutral-800 rounded-md transition">
         <Menu size={22} />
       </button>
+
+      {menuDropdownOpen && (
+         <MenuDropdown onClose={() => setMenuDropdownOpen(false)} />
+      )}
 
       {/* Center: Logo */}
       <Link href="/" className="text-lg font-semibold tracking-wide">
