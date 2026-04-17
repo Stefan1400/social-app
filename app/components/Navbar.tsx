@@ -18,13 +18,20 @@ export default function Navbar() {
       </Link>
 
       {/* Right: Create Icon */}
-      <Link 
-        href="/create" 
-        className="p-2 hover:bg-neutral-800 rounded-md transition"
-      >
-        <PlusSquare size={22} />
-      </Link>
+      <div className="flex items-center gap-5">
+         <Link 
+            href="/create" 
+            className="p-2 hover:bg-neutral-800 rounded-md transition"
+            >
+            <PlusSquare size={22} />
+         </Link>
 
+         <Link
+            href='/profile'
+            className="w-7 h-7 rounded-full bg-blue-500 flex items-center justify-center overflow-hidden hover:bg-neutral-700 transition"
+            >
+         </Link>
+      </div>
     </nav>
   );
 }
