@@ -8,11 +8,9 @@ export default function Feed() {
    const [postData, setPostData] = useState<PostTypes[] | null>(null);
    
    async function handleGetPosts() {
+      
       const res = await fetch('/api/posts/get-posts', {
-         method: 'GET',
-         headers: {
-            'Content-Type': 'application/json'
-         }
+         method: 'GET'
       })
 
       if (!res.ok) {
@@ -33,17 +31,21 @@ export default function Feed() {
          </div>
          
          <ul className="list-none mt-10 flex flex-col w-screen p-5 gap-5">
-            {postData?.map((p, index) => (
+            {postData?.map((p, index) => {
+
+            return (
                <li key={index}>
                   <Link href={`/pages/view-post/${p.id}`} >
                      <Post 
-                        userId={p.userId} 
+                        id={p.id}
+                        user={p.user} 
                         title={p.title} 
                         content={p.content} 
                      />
                   </Link>
                </li>
-            ))}
+            )
+            })}
          </ul>
       </div>
    )

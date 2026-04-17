@@ -6,7 +6,8 @@ export async function GET(req: Request) {
    try {
       const fetchedPosts = await prisma.post.findMany({
          include: {
-            comments: true
+            comments: true,
+            user: true
          }
       })
 

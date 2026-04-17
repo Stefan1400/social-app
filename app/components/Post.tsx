@@ -1,3 +1,5 @@
+import { User } from "@/types/user";
+
 export type LikeType = 'LIKE' | 'DISLIKE'; 
 
 export type LikeTypes = {
@@ -9,21 +11,21 @@ export type Comment = {
 }
 
 export type PostTypes = {
-   userId: string;
    title: string;
    content: string;
+   user: User;
+   id: string;
 }
 
-export default function Post({ userId, title, content }: PostTypes) { 
+export default function Post({ title, content, user }: PostTypes) { 
    
    return (
       <>
-         <p className="self-start">posted by <span className="font-semibold">{userId}</span></p>
+         <p className="self-start">posted by <span className="font-semibold">{user.username}</span></p>
          <div className="w-full h-auto p-3 bg-[#171717] text-white rounded-sm border border-red-500">
-            <h3>{title}</h3>
+            <h3 className="text-xl font-medium">{title}</h3>
             <p>{content}</p>
          </div>
       </>
-   
    )
 }
