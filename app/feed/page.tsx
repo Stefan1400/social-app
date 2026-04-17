@@ -24,13 +24,13 @@ export default function Feed() {
    
    return (
       <div className="w-screen h-screen p-3 flex flex-col items-center">
-         <div className="fixed left-0 top-0 p-5 z-1000 w-screen bg-[#171717] flex justify-between px-3">
+         <div className="fixed left-0 top-15 p-5 z-1000 w-screen flex justify-between px-3">
             <h1>Feed</h1>
 
             <button onClick={handleGetPosts}>Get Posts</button>
          </div>
          
-         <ul className="list-none mt-10 flex flex-col w-screen p-5 gap-5">
+         <ul className="list-none mt-30 flex flex-col w-screen p-5 gap-5">
             {postData?.map((p, index) => {
 
             return (
