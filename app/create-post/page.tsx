@@ -1,20 +1,39 @@
 'use client';
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function CreatePostPage() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+  const [disabled, setDisabled] = useState(true);
+
+  function validateForm() {
+    if (!title) {
+      setDisabled(true);
+      return false;
+    }
+    setDisabled(false);
+    return true;
+  }
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
 
-    // You will implement this later
+    const validated = validateForm();
+
+    if (!validated) return;
+
+    setDisabled(false);
+
     console.log({
       title,
       content,
     });
   }
+
+  useEffect(() => {
+    validateForm();
+  }, [title, content]);
 
   return (
     <div className="w-screen min-h-screen flex justify-center items-start pt-24 px-4">
@@ -31,7 +50,7 @@ export default function CreatePostPage() {
           <label className="text-sm text-gray-400">Title</label>
           <input
             type="text"
-            placeholder="Enter a title..."
+            placeholder="Title (required)"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             className="w-full p-2 rounded-md bg-[#0f0f0f] border border-neutral-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -42,7 +61,7 @@ export default function CreatePostPage() {
         <div className="flex flex-col gap-2">
           <label className="text-sm text-gray-400">Content</label>
           <textarea
-            placeholder="Write your post..."
+            placeholder="Content (optional)"
             value={content}
             onChange={(e) => setContent(e.target.value)}
             rows={6}
@@ -52,8 +71,9 @@ export default function CreatePostPage() {
 
         {/* Submit Button */}
         <button
+          disabled={disabled}
           type="submit"
-          className="mt-2 bg-blue-500 hover:bg-blue-600 transition text-white py-2 rounded-md font-medium"
+          className={`${disabled ? 'bg-[#1c1c1c] text-gray-400' : 'bg-blue-500 text-white'} mt-2 hover:bg-blue-600 transition py-2 rounded-md font-medium`}
         >
           Post
         </button>
