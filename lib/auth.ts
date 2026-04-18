@@ -1,5 +1,6 @@
 import { cookies } from "next/headers";
 import jwt from "jsonwebtoken";
+import { prisma } from "./prisma";
 
 export async function getCurrentUser() {
    const cookieStore = await cookies();
@@ -12,7 +13,16 @@ export async function getCurrentUser() {
          userId: string;
       }
 
-      return decoded;
+      const user = await prisma.user.findUnique({
+         where: { id: decoded.userId },
+         select: {
+            id: true,
+            username: true,
+            email: true
+         }
+      })
+
+      return user;
    } catch (err) {
       return null;
    }
