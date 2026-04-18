@@ -16,7 +16,7 @@ export default function CreatePostPage() {
     return true;
   }
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
 
     const validated = validateForm();
@@ -29,6 +29,25 @@ export default function CreatePostPage() {
       title,
       content,
     });
+
+    const res = await fetch('/api/posts/create-post', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ title, content })
+    });
+
+    if (!res.ok) {
+      throw new Error('Error when creating post');
+    };
+
+    const data = await res.json();
+
+    console.log('createdPost:', data);
+
+    setTitle('');
+    setContent('');
   }
 
   useEffect(() => {
