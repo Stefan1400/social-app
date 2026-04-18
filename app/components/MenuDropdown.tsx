@@ -12,7 +12,7 @@ type MenuDropdownTypes = {
 export default function MenuDropdown({ user, onClose }: MenuDropdownTypes) {
   
   return (
-    <div className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm">
+    <div className="fixed inset-0 bg-black/70 backdrop-blur-sm left-0 top-0 z-1000">
 
       {/* Panel */}
       <div className="w-full h-full bg-[#171717] flex flex-col items-start">
@@ -60,7 +60,6 @@ export default function MenuDropdown({ user, onClose }: MenuDropdownTypes) {
               </Link>
             </>
           )}
-
         </div>
       </div>
     </div>
