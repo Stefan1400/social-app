@@ -37,7 +37,7 @@ export default function MenuDropdown({ user, onClose }: MenuDropdownTypes) {
 
           {user ? (
             <>
-              <Link href="/create" onClick={onClose} className="hover:text-gray-300">
+              <Link href="/create-post" onClick={onClose} className="hover:text-gray-300">
                 Create Post
               </Link>
 

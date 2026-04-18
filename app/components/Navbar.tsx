@@ -34,7 +34,7 @@ export default function Navbar({ user }: NavbarProps) {
       {/* Right: Create Icon */}
       <div className="flex items-center gap-5">
          <Link 
-            href="/create" 
+            href="/create-post" 
             className="p-2 hover:bg-neutral-800 rounded-md transition"
             >
             <PlusSquare size={22} />
