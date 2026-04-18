@@ -2,37 +2,34 @@
 
 import Link from "next/link";
 import { X } from "lucide-react";
+import { User } from "@/types/user";
 
-type User = {
-  userId: string;
-} | null;
-
-export default function MenuDropdown({
-  onClose,
-  user,
-}: {
+type MenuDropdownTypes = {
+  user: User | null;
   onClose: () => void;
-  user?: User;
-}) {
+}
+
+export default function MenuDropdown({ user, onClose }: MenuDropdownTypes) {
+  
   return (
     <div className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm">
 
       {/* Panel */}
-      <div className="w-full h-full bg-[#171717] flex flex-col">
+      <div className="w-full h-full bg-[#171717] flex flex-col items-start">
 
         {/* Top bar */}
-        <div className="flex justify-between items-center p-4 border-b border-neutral-800">
+        <div className="w-screen flex justify-between items-center p-4 border-b border-neutral-800">
 
           <button
             onClick={onClose}
-            className="p-2 hover:bg-neutral-800 rounded-md"
+            className="p-2 hover:bg-neutral-800 rounded-md flex-"
           >
             <X size={22} />
           </button>
         </div>
 
         {/* Links */}
-        <div className="flex flex-col p-4 gap-4 text-lg">
+        <div className="flex flex-col p-4 gap-4 text-large">
 
           <Link href="/" onClick={onClose} className="hover:text-gray-300">
             Home
@@ -47,6 +44,10 @@ export default function MenuDropdown({
               <Link href="/profile" onClick={onClose} className="hover:text-gray-300">
                 Profile
               </Link>
+
+              <button className="hover:text-gray-300 p-0 text-left">
+                Logout
+              </button>
             </>
           ) : (
             <>

@@ -4,8 +4,13 @@ import Link from "next/link";
 import { Menu, PlusSquare } from "lucide-react";
 import { useState } from "react";
 import MenuDropdown from "./MenuDropdown";
+import type { User } from "@/types/user";
 
-export default function Navbar() {
+type NavbarProps = {
+   user: User;
+}
+
+export default function Navbar({ user }: NavbarProps) {
    
    const [menuDropdownOpen, setMenuDropdownOpen] = useState(false);
   
@@ -18,7 +23,7 @@ export default function Navbar() {
       </button>
 
       {menuDropdownOpen && (
-         <MenuDropdown onClose={() => setMenuDropdownOpen(false)} />
+         <MenuDropdown onClose={() => setMenuDropdownOpen(false)} user={user} />
       )}
 
       {/* Center: Logo */}
