@@ -6,6 +6,7 @@ export default function CreatePostPage() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [disabled, setDisabled] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   function validateForm() {
     if (!title) {
@@ -24,11 +25,7 @@ export default function CreatePostPage() {
     if (!validated) return;
 
     setDisabled(false);
-
-    console.log({
-      title,
-      content,
-    });
+    setLoading(true);
 
     const res = await fetch('/api/posts/create-post', {
       method: 'POST',
@@ -48,6 +45,8 @@ export default function CreatePostPage() {
 
     setTitle('');
     setContent('');
+
+    setLoading(false);
   }
 
   useEffect(() => {
@@ -94,7 +93,7 @@ export default function CreatePostPage() {
           type="submit"
           className={`${disabled ? 'bg-[#1c1c1c] text-gray-400' : 'bg-blue-500 text-white'} mt-2 hover:bg-blue-600 transition py-2 rounded-md font-medium`}
         >
-          Post
+          {loading ? 'Creating Post...' : 'Post'}
         </button>
       </form>
     </div>
