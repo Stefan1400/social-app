@@ -7,7 +7,7 @@ import MenuDropdown from "./MenuDropdown";
 import type { User } from "@/types/user";
 
 type NavbarProps = {
-   user: User;
+   user: User | null;
 }
 
 export default function Navbar({ user }: NavbarProps) {
