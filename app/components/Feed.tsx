@@ -19,7 +19,7 @@ export default function Feed({ posts }: FeedTypes) {
 
             return (
                <li key={p.id}>
-                  <Link href={`/pages/view-post/${p.id}`} >
+                  <Link href={`/post/${p.id}`} >
                      <Post 
                         id={p.id}
                         user={p.user} 
