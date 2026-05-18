@@ -1,9 +1,10 @@
 'use client';
 
 import { Heart } from "lucide-react";
+import { MessageCircle } from "lucide-react";
 
 type Props = {
-   feedbackType: 'LIKE';
+   feedbackType: 'LIKE' | 'COMMENT';
    feedbackCount: number;
 }
 
@@ -33,7 +34,11 @@ export default function FeedbackButton({ feedbackType, feedbackCount }: Props) {
 
    return (
       <button onClick={handleLikePost} className="w-[50px] h-auto p-2 flex items-center justify-between rounded-lg">
-         {feedbackType === 'LIKE' ? <Heart size={19} /> : ''}
+         {feedbackType === 'LIKE' ? 
+            <Heart size={19} /> 
+         : feedbackType === 'COMMENT' &&
+         <MessageCircle size={19} />}
+         
          <span>{feedbackCount}</span>
       </button>
    )

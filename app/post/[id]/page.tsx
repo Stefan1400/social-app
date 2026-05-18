@@ -31,7 +31,7 @@ export default async function ViewPost({ params }: {
             <p className="mt-3">{post.content}</p>
          </div>
 
-         <PostFeedback likes={likesCount} />
+         <PostFeedback likes={likesCount} comments={post.comments?.length || 0} />
 
          <CommentBox />
 

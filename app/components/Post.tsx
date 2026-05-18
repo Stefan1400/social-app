@@ -25,7 +25,7 @@ export default function Post({ title, content, user }: PostTypes) {
             <h3 className="text-xl font-medium">{title}</h3>
             <p>{content}</p>
 
-            <PostFeedback likes={3}/>
+            <PostFeedback likes={3} comments={2}/>
          </div>
       </>
    )
