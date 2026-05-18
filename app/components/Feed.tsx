@@ -1,7 +1,6 @@
 'use client';
 import Post from "../components/Post";
 import type { PostTypes } from "../components/Post";
-import Link from "next/link";
 
 type FeedTypes = {
    posts: PostTypes[];
@@ -15,21 +14,19 @@ export default function Feed({ posts }: FeedTypes) {
          </div>
          
          <ul className="list-none mt-30 flex flex-col w-screen">
-            {posts.map((p, index) => {
+            {posts.map(p => {
 
             return (
                <li key={p.id}>
-                  <Link href={`/post/${p.id}`} >
-                     <Post 
-                        id={p.id}
-                        user={p.user} 
-                        title={p.title} 
-                        content={p.content} 
-                        likes={p.likes}
-                        comments={p.comments}
-                        createdAt={p.createdAt}
-                     />
-                  </Link>
+                  <Post 
+                     id={p.id}
+                     user={p.user} 
+                     title={p.title} 
+                     content={p.content} 
+                     likes={p.likes}
+                     comments={p.comments}
+                     createdAt={p.createdAt}
+                  />
                </li>
             )
             })}
