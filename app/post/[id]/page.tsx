@@ -1,7 +1,6 @@
 import { prisma } from "@/lib/prisma";
 import Comment from "@/app/components/Comment";
 import PostFeedback from "@/app/components/PostFeedback";
-import React from "react";
 import CommentBox from "@/app/components/CommentBox";
 
 export default async function ViewPost({ params }: {
@@ -23,7 +22,6 @@ export default async function ViewPost({ params }: {
    } 
 
    const likesCount = post.likes.filter((l) => l.type === 'LIKE').length;
-   const dislikesCount = post.likes.filter((l) => l.type === 'DISLIKE').length;
 
    return (
       <div className="w-screen h-screen flex flex-col">
@@ -33,7 +31,7 @@ export default async function ViewPost({ params }: {
             <p className="mt-3">{post.content}</p>
          </div>
 
-         <PostFeedback likes={likesCount} dislikes={dislikesCount} />
+         <PostFeedback likes={likesCount} />
 
          <CommentBox />
 

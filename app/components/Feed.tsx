@@ -2,6 +2,7 @@
 import Post from "../components/Post";
 import type { PostTypes } from "../components/Post";
 import Link from "next/link";
+import PostFeedback from "./PostFeedback";
 
 type FeedTypes = {
    posts: PostTypes[];
@@ -14,7 +15,7 @@ export default function Feed({ posts }: FeedTypes) {
             <h1>Feed</h1>
          </div>
          
-         <ul className="list-none mt-30 flex flex-col w-screen p-5 gap-5">
+         <ul className="list-none mt-30 flex flex-col w-screen">
             {posts.map((p, index) => {
 
             return (
@@ -25,6 +26,7 @@ export default function Feed({ posts }: FeedTypes) {
                         user={p.user} 
                         title={p.title} 
                         content={p.content} 
+                        likes={p.likes}
                      />
                   </Link>
                </li>

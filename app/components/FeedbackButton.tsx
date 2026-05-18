@@ -1,10 +1,9 @@
 'use client';
 
-import LikeIcon from "../assets/LikeIcon.tsx";
-import DislikeIcon from "../assets/DislikeIcon.tsx";
+import { Heart } from "lucide-react";
 
 type Props = {
-   feedbackType: 'LIKE' | 'DISLIKE';
+   feedbackType: 'LIKE';
    feedbackCount: number;
 }
 
@@ -33,9 +32,9 @@ export default function FeedbackButton({ feedbackType, feedbackCount }: Props) {
    } 
 
    return (
-      <button onClick={handleLikePost} className="w-[50px] h-auto p-2 flex items-center justify-between bg-[#181818] rounded-lg">
+      <button onClick={handleLikePost} className="w-[50px] h-auto p-2 flex items-center justify-between rounded-lg">
+         {feedbackType === 'LIKE' ? <Heart size={19} /> : ''}
          <span>{feedbackCount}</span>
-         {feedbackType === 'LIKE' ? <LikeIcon /> : feedbackType === 'DISLIKE' ? <DislikeIcon /> : ''}
       </button>
    )
 }
