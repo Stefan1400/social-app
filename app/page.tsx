@@ -7,7 +7,7 @@ export default async function Home() {
     include: {
       user: true,
       likes: true,
-      comments: true
+      comments: true,
     }
   })
   

@@ -11,6 +11,8 @@ export default function PostFeedback({ likes, comments }: FeedbackTypes) {
     <div className="flex items-center gap-2 mt-3">
       <FeedbackButton feedbackType='LIKE' feedbackCount={likes} />
       <FeedbackButton feedbackType='COMMENT' feedbackCount={comments} />
+
+      <span></span>
     </div>
   )
 }

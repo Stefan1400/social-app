@@ -2,7 +2,6 @@
 import Post from "../components/Post";
 import type { PostTypes } from "../components/Post";
 import Link from "next/link";
-import PostFeedback from "./PostFeedback";
 
 type FeedTypes = {
    posts: PostTypes[];
@@ -27,6 +26,7 @@ export default function Feed({ posts }: FeedTypes) {
                         title={p.title} 
                         content={p.content} 
                         likes={p.likes}
+                        createdAt={p.createdAt}
                      />
                   </Link>
                </li>
