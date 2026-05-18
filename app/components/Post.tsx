@@ -3,8 +3,6 @@ import PostFeedback from "./PostFeedback";
 
 export type Comment = {
    content: string;
-   userId: string;
-   createdAt: Date;
 }
 export type Like = {
    id: string;

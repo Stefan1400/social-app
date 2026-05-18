@@ -21,7 +21,7 @@ export default async function ViewPost({ params }: {
       return <>Post not found</>
    } 
 
-   const likesCount = post.likes.filter((l) => l.type === 'LIKE').length;
+   // const likesCount = post.likes.filter((l) => l.type === 'LIKE').length;
 
    return (
       <div className="w-screen h-screen flex flex-col">
@@ -31,7 +31,7 @@ export default async function ViewPost({ params }: {
             <p className="mt-3">{post.content}</p>
          </div>
 
-         <PostFeedback likes={likesCount} comments={post.comments?.length || 0} />
+         <PostFeedback likes={post?.likes.length || 0} comments={post.comments?.length || 0} />
 
          <CommentBox />
 

@@ -26,6 +26,7 @@ export default function Feed({ posts }: FeedTypes) {
                         title={p.title} 
                         content={p.content} 
                         likes={p.likes}
+                        comments={p.comments}
                         createdAt={p.createdAt}
                      />
                   </Link>
