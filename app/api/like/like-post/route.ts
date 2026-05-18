@@ -4,13 +4,13 @@ import { NextResponse } from "next/server";
 export async function POST(req: Request) {
    const body = await req.json();
    
-   const { userId, postId, type } = body;
+   const { userId, postId } = body;
 
    try {
 
-      if (!userId || !postId || !type) {
+      if (!userId || !postId) {
          return NextResponse.json(
-            { error: 'Bad Reqest' },
+            { error: 'Bad Request' },
             { status: 400 }
          )
       };
@@ -24,19 +24,11 @@ export async function POST(req: Request) {
          }
       })
 
-      if (likeExists && likeExists.type === type) {
-         return NextResponse.json({
-            message: 'No change (same reaction)',
-            data: likeExists
-         });
-      }
-
       if (!likeExists) {
          const likeAdded = await prisma.like.create({
             data: { 
                userId, 
-               postId, 
-               type
+               postId
             }
          })
 
@@ -48,11 +40,8 @@ export async function POST(req: Request) {
       }
 
       if (likeExists) {
-         const likeUpdated = await prisma.like.update({
-            where: { id: likeExists?.id },
-            data: {
-               type: type
-            }
+         const likeUpdated = await prisma.like.delete({
+            where: { id: likeExists.id },
          })
 
          return NextResponse.json({

@@ -17,9 +17,8 @@ export default function FeedbackButton({ feedbackType, feedbackCount }: Props) {
             'Content-Type': 'application/json'
          },
          body: JSON.stringify({ 
-            userId: 'cmnxhpdow0001p0wppdar35h9',  
-            postId: 'cmnxilw5x0002p0wpk1wsvghi',
-            type: feedbackType
+            userId: 'cmokgr9g10000k7z3tiacpc79',  
+            postId: 'cmo7kn60d0001y19s4jk6gx14',
          })
       })
 
