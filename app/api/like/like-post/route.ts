@@ -1,24 +1,34 @@
 import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
+import { getCurrentUser } from "@/lib/auth";
 
 export async function POST(req: Request) {
    const body = await req.json();
    
-   const { userId, postId } = body;
+   const { postId } = body;
 
    try {
 
-      if (!userId || !postId) {
+      if (!postId) {
          return NextResponse.json(
             { error: 'Bad Request' },
             { status: 400 }
          )
       };
 
+      const user = await getCurrentUser();
+
+      if (!user) {
+         return NextResponse.json(
+            { error: 'Unauthorized' },
+            { status: 401 }
+         )
+      }
+
       const likeExists = await prisma.like.findUnique({
          where: { 
             userId_postId: {
-               userId,
+               userId: user.id,
                postId 
             }
          }
@@ -27,14 +37,17 @@ export async function POST(req: Request) {
       if (!likeExists) {
          const likeAdded = await prisma.like.create({
             data: { 
-               userId, 
+               userId: user.id, 
                postId
             }
          })
 
+         const likesCount = await prisma.like.count({ where: { postId } });
+
          return NextResponse.json({
             message: 'Successfully liked post',
             addedLike: likeAdded,
+            likesCount,
             status: 201
          })
       }
@@ -44,9 +57,12 @@ export async function POST(req: Request) {
             where: { id: likeExists.id },
          })
 
+         const likesCount = await prisma.like.count({ where: { postId } });
+
          return NextResponse.json({
             message: 'Successfully updated like',
             updatedLike: likeUpdated,
+            likesCount,
             status: 200
          })
       }

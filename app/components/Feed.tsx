@@ -1,9 +1,8 @@
-'use client';
 import Post from "../components/Post";
 import type { PostTypes } from "../components/Post";
 
 type FeedTypes = {
-   posts: PostTypes[];
+   posts: (PostTypes & { isLiked: boolean })[];
 };
 
 export default function Feed({ posts }: FeedTypes) {
@@ -26,6 +25,7 @@ export default function Feed({ posts }: FeedTypes) {
                      likes={p.likes}
                      comments={p.comments}
                      createdAt={p.createdAt}
+                     isLiked={p.isLiked}
                   />
                </li>
             )

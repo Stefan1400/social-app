@@ -21,9 +21,19 @@ export type PostTypes = {
    likes?: Like[];
    createdAt: Date;
    comments?: Comment[];
+   isLiked: boolean;
 }
 
-export default function Post({ id, title, content, user, createdAt, likes, comments }: PostTypes) { 
+export default function Post({ 
+   id, 
+   title, 
+   content, 
+   user, 
+   createdAt, 
+   likes, 
+   comments, 
+   isLiked 
+}: PostTypes) { 
    
    return (
       <>
@@ -41,6 +51,7 @@ export default function Post({ id, title, content, user, createdAt, likes, comme
                id={id}
                likes={likes?.length || 0} 
                comments={comments?.length || 0} 
+               isLiked={isLiked}
             />
          </div>
       </>
