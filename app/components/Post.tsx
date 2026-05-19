@@ -27,7 +27,7 @@ export default function Post({ id, title, content, user, createdAt, likes, comme
    
    return (
       <>
-         <div className="flex flex-col gap-3 w-screen h-auto p-3 py-4 text-white rounded-sm border-y-2 border-[#1f1f1f]">
+         <div className="flex flex-col gap-3 w-full h-auto p-3 py-4 text-white rounded-sm border-y-2 border-[#1f1f1f]">
             <Link href={`/post/${id}`} >
                <PostContent 
                   title={title} 
@@ -38,6 +38,7 @@ export default function Post({ id, title, content, user, createdAt, likes, comme
             </Link>
             
             <PostFeedback 
+               id={id}
                likes={likes?.length || 0} 
                comments={comments?.length || 0} 
             />
