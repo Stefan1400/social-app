@@ -23,7 +23,7 @@ export default async function ViewPost({ params }: {
 
    return (
       <div className="w-screen h-screen flex flex-col">
-         <div className="p-3 bg-[#131313] rounded-md">
+         <div className="p-3 rounded-md">
             <p>posted by user <span className="font-semibold">{post.userId}</span></p>
             <h1 className="text-3xl mt-7">{post.title}</h1>
             <p className="mt-3">{post.content}</p>
