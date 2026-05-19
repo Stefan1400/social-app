@@ -9,7 +9,7 @@ type FeedTypes = {
 export default function Feed({ posts }: FeedTypes) {
    return (
       <div className="w-screen h-screen p-3 flex flex-col items-center">
-         <div className="fixed left-0 top-15 p-5 z-100 w-screen flex justify-between px-3">
+         <div className="absolute left-0 top-15 p-5 z-100 w-screen flex justify-between px-3">
             <h1>Feed</h1>
          </div>
          
