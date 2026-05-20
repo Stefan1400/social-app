@@ -13,7 +13,11 @@ export default async function ViewPost({ params }: {
    const post = await prisma.post.findUnique({
       where: { id: id },
       include: { 
-         comments: true,
+         comments: {
+            include: {
+               user: true
+            }
+         },
          likes: true 
       }
    })
@@ -43,6 +47,7 @@ export default async function ViewPost({ params }: {
                {post.comments?.map((c, index) => (
                   <li key={index}>
                      <Comment 
+                        username={c.user.username}
                         userId={c.userId}  
                         content={c.content} 
                      />
