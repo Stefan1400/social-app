@@ -18,7 +18,8 @@ export default async function ViewPost({ params }: {
                user: true
             }
          },
-         likes: true 
+         likes: true,
+         user: true
       }
    })
 
@@ -30,10 +31,13 @@ export default async function ViewPost({ params }: {
    const isLiked = user ? post.likes.some(l => l.userId === user.id) : false;
 
    return (
-      <div className="w-screen h-screen flex flex-col">
+      <div className="w-screen h-screen flex flex-col pt-18">
          <div className="p-3 rounded-md">
-            <p>posted by user <span className="font-semibold">{post.userId}</span></p>
-            <h1 className="text-3xl mt-7">{post.title}</h1>
+            <div className="flex items-center gap-2">
+               <div className="w-5 h-5 bg-blue-500 rounded-full"></div>
+               <p className="font-semibold">{post.user.username}</p>
+            </div>
+            <h1 className="text-3xl mt-5">{post.title}</h1>
             <p className="mt-3">{post.content}</p>
          </div>
 
