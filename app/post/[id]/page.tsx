@@ -52,7 +52,7 @@ export default async function ViewPost({ params }: {
 
          <PostFeedback id={post.id} likes={post?.likes.length || 0} commentCount={commentCount} isLiked={isLiked} />
 
-         <CommentBox />
+         <CommentBox postId={post.id} />
 
          <div className="mt-8">
             <h3 className="pl-5 text-[1.2rem]">Comments</h3>

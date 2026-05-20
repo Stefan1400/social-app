@@ -1,11 +1,12 @@
 'use client';
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useTransition } from "react";
 import { createComment } from "@/app/actions/createComment";
 
-export default function CommentBox() {
+export default function CommentBox({ postId }: { postId: string }) {
   const [isActive, setIsActive] = useState(false);
   const [content, setContent] = useState("");
+  const [isPending, startTransition] = useTransition();
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   useEffect(() => {
@@ -14,13 +15,28 @@ export default function CommentBox() {
     }
   }, [isActive]);
 
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+
+    const formData = new FormData(e.currentTarget);
+    
+    startTransition(async () => {
+      await createComment(formData);
+
+      setContent("");
+      setIsActive(false);
+    });
+  }
+
   return (
     <div className="w-full max-w-3xl px-6 mx-auto mt-8">
       {isActive ? (
-        <form action={createComment} className="w-full rounded-3xl border border-neutral-700 bg-[#121212] p-4 shadow-sm shadow-black/20">
+        <form onSubmit={handleSubmit} className="w-full rounded-3xl border border-neutral-700 bg-[#121212] p-4 shadow-sm shadow-black/20">
+          <input type="hidden" name="postId" value={postId} />
+          
           <textarea
             ref={textareaRef}
-            className="min-h-[120px] w-full resize-none rounded-3xl border border-transparent px-4 py-4 text-sm text-white placeholder:text-neutral-500 outline-none transition"
+            className="min-h-30 w-full resize-none rounded-3xl border border-transparent px-4 py-4 text-sm text-white placeholder:text-neutral-500 outline-none transition"
             placeholder="Share your thoughts..."
             name="content"
             value={content}
@@ -40,7 +56,7 @@ export default function CommentBox() {
             </button>
             <button
               type="submit"
-              disabled={!content.trim()}
+              disabled={!content.trim() || isPending}
               className="rounded-full bg-white px-4 py-2 text-sm font-semibold text-black transition hover:bg-neutral-200 disabled:cursor-not-allowed disabled:opacity-40"
             >
               Comment
