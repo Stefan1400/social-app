@@ -5,11 +5,11 @@ import Link from "next/link";
 export type FeedbackTypes = {
    id: string;
    likes: number;
-   comments: number;
+   commentCount: number;
    isLiked?: boolean;
 }
 
-export default function PostFeedback({ id, likes, comments, isLiked }: FeedbackTypes) {
+export default function PostFeedback({ id, likes, commentCount, isLiked }: FeedbackTypes) {
 
    return (
     <div className="flex items-center gap-2 mt-3">
@@ -23,7 +23,7 @@ export default function PostFeedback({ id, likes, comments, isLiked }: FeedbackT
       <Link href={`/post/${id}`}>
         <FeedbackButton 
           feedbackType='COMMENT' 
-          feedbackCount={comments} 
+          feedbackCount={commentCount} 
           />
       </Link>
     </div>

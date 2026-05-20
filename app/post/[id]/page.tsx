@@ -34,6 +34,10 @@ export default async function ViewPost({ params }: {
 
    const user = await getCurrentUser();
    const isLiked = user ? post.likes.some(l => l.userId === user.id) : false;
+   const commentCount = post.comments?.reduce(
+      (total, comment) => total + 1 + (comment.replies?.length || 0),
+      0
+   ) ?? 0;
 
    return (
       <div className="w-screen h-screen flex flex-col pt-18">
@@ -46,7 +50,7 @@ export default async function ViewPost({ params }: {
             <p className="mt-3">{post.content}</p>
          </div>
 
-         <PostFeedback id={post.id} likes={post?.likes.length || 0} comments={post.comments?.length || 0} isLiked={isLiked} />
+         <PostFeedback id={post.id} likes={post?.likes.length || 0} commentCount={commentCount} isLiked={isLiked} />
 
          <CommentBox />
 

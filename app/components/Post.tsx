@@ -3,10 +3,6 @@ import PostContent from "./PostContent";
 import PostFeedback from "./PostFeedback";
 import Link from "next/link";
 
-export type Comment = {
-   content: string;
-}
-
 export type Like = {
    id: string;
    userId: string;
@@ -20,7 +16,7 @@ export type PostTypes = {
    id: string;
    likes?: Like[];
    createdAt: Date;
-   comments?: Comment[];
+   commentCount?: number;
    isLiked: boolean;
 }
 
@@ -31,10 +27,9 @@ export default function Post({
    user, 
    createdAt, 
    likes, 
-   comments, 
-   isLiked 
+   commentCount = 0, 
+   isLiked
 }: PostTypes) { 
-   
    return (
       <>
          <div className="flex flex-col gap-3 w-full h-auto p-3 py-4 text-white rounded-sm border-y-2 border-[#1f1f1f]">
@@ -50,7 +45,7 @@ export default function Post({
             <PostFeedback 
                id={id}
                likes={likes?.length || 0} 
-               comments={comments?.length || 0} 
+               commentCount={commentCount} 
                isLiked={isLiked}
             />
          </div>

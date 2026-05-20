@@ -10,12 +10,20 @@ export default async function Home() {
     include: {
       user: true,
       likes: true,
-      comments: true,
+      comments: {
+        include: {
+            replies: true
+        }
+      },
     }
   })
 
   const postsWithLikedStatus = fetchedPosts.map(post => ({
     ...post,
+    commentCount: post.comments?.reduce(
+      (total, comment) => total + 1 + (comment.replies?.length || 0),
+      0
+    ) ?? 0,
     isLiked: user ? post.likes.some(like => like.userId === user.id) : false
   }));
   

@@ -2,7 +2,7 @@ import Post from "../components/Post";
 import type { PostTypes } from "../components/Post";
 
 type FeedTypes = {
-   posts: (PostTypes & { isLiked: boolean })[];
+   posts: (PostTypes & { isLiked: boolean; commentCount?: number })[];
 };
 
 export default function Feed({ posts }: FeedTypes) {
@@ -23,7 +23,7 @@ export default function Feed({ posts }: FeedTypes) {
                      title={p.title} 
                      content={p.content} 
                      likes={p.likes}
-                     comments={p.comments}
+                     commentCount={p.commentCount}
                      createdAt={p.createdAt}
                      isLiked={p.isLiked}
                   />
