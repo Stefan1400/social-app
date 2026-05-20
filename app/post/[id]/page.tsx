@@ -15,9 +15,14 @@ export default async function ViewPost({ params }: {
       include: { 
          comments: {
             include: {
-               user: true
+               user: true,
+               replies: {
+                  include: {
+                     user: true
+                  }
+               }
             }
-         },
+            },
          likes: true,
          user: true
       }
@@ -53,7 +58,8 @@ export default async function ViewPost({ params }: {
                      <Comment 
                         username={c.user.username}
                         userId={c.userId}  
-                        content={c.content} 
+                        content={c.content}
+                        replies={c.replies}
                      />
                   </li>
                ))}
