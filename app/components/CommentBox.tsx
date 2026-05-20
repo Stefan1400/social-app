@@ -15,7 +15,7 @@ export default function CommentBox() {
   }, [isActive]);
 
   return (
-    <div className="w-full max-w-3xl px-6 mx-auto mt-5">
+    <div className="w-full max-w-3xl px-6 mx-auto mt-8">
       {isActive ? (
         <form action={createComment} className="w-full rounded-3xl border border-neutral-700 bg-[#121212] p-4 shadow-sm shadow-black/20">
           <textarea

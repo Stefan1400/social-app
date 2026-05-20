@@ -54,7 +54,7 @@ export default async function ViewPost({ params }: {
 
          <CommentBox />
 
-         <div className="mt-25">
+         <div className="mt-8">
             <h3 className="pl-5 text-[1.2rem]">Comments</h3>
             <ul className="list-none flex flex-col w-screen p-5 gap-5">
                {post.comments?.map((c, index) => (
